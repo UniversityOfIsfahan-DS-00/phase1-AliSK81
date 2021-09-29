@@ -31,4 +31,12 @@ public class Rating {
     public void setNumVotes(int numVotes) {
         this.numVotes = numVotes;
     }
+
+    @Override
+    public String toString() {
+        return "Rating{" +
+                "\n\taverageRating= " + averageRating +
+                "\n\tnumVotes= " + numVotes +
+                "\n}";
+    }
 }

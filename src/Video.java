@@ -34,31 +34,17 @@ public class Video {
         return titleId;
     }
 
-    public int getOrdering() {
-        return ordering;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public String[] getTypes() {
-        return types;
-    }
-
-    public String[] getAttributes() {
-        return attributes;
-    }
-
-    public boolean isOriginalTitle() {
-        return isOriginalTitle;
+    @Override
+    public String toString() {
+        return "Video{" +
+                "\n\ttitleId= " + titleId +
+                "\n\tordering= " + ordering +
+                "\n\ttitle= " + title +
+                "\n\tregion= " + region +
+                "\n\tlanguage= " + language +
+                "\n\ttypes= " + String.join(", ", types) +
+                "\n\tattributes= " + String.join(", ", attributes) +
+                "\n\tisOriginalTitle= " + isOriginalTitle +
+                "\n}";
     }
 }
