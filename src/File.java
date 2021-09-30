@@ -19,6 +19,7 @@ abstract public class File {
 
     public static void writData(String fileName, String header, ArrayList<String[]> data) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+            bw.write(header + "\n");
 
             for (String[] line : data)
                 bw.write(String.join("\t", line) + "\n");

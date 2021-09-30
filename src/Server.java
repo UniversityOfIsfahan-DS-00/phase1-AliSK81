@@ -60,4 +60,48 @@ abstract public class Server {
             System.out.println("-----------------------------------");
         }
     }
+
+    // writes new ratings into file
+    public static void updateRatings() throws IOException {
+        ArrayList<String[]> data = new ArrayList<>();
+        for (Rating rating : ratings.values()) {
+            data.add(new String[]{rating.getTconst(),
+                    String.format("%.1f", rating.getAverageRating()), String.valueOf(rating.getNumVotes())});
+        }
+
+        String header = "tconst\taverageRating\tnumVotes";
+
+        File.writData("title.ratings.txt", header, data);
+    }
+
+    // rate a video if already not rated
+    public static void addRating(String tconst, int score) {
+        if (score < 1 || score > 10)
+            throw new ArithmeticException("Score must be in range 1-10");
+
+        Rating rating = ratings.get(tconst);
+        int votes = rating.getNumVotes();
+        double newAverage = (score + votes * rating.getAverageRating()) / (votes + 1);
+        rating.setAverageRating(newAverage);
+        rating.setNumVotes(votes + 1);
+    }
+
+    public static boolean uniqueUsername(String username) {
+        return usernames.add(username);
+    }
+
+    // creates new user & returns true is username doesn't already exist
+    public static void addUser(String username, String password) {
+        users.add(new User(username, password));
+    }
+
+    // returns user if correct username & password
+    public static User getUser(String username, String password) {
+        for (User user : users)
+            if (username.equals(user.getUsername()) &&
+                    password.equals(user.getPassword()))
+                return user;
+
+        return null;
+    }
 }

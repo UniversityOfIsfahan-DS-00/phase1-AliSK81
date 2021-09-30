@@ -35,7 +35,7 @@ public class Rating {
     @Override
     public String toString() {
         return "Rating{" +
-                "\n\taverageRating= " + averageRating +
+                "\n\taverageRating= " + String.format("%.1f", averageRating) +
                 "\n\tnumVotes= " + numVotes +
                 "\n}";
     }
