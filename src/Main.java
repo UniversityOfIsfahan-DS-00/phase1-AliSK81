@@ -89,6 +89,7 @@ public class Main {
                         System.out.println("Updating data & exit");
                         try {
                             Server.updateRatings();
+                            Server.updateUsers();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

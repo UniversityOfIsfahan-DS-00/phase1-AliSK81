@@ -12,6 +12,7 @@ abstract public class Server {
         try {
             readAkas();
             readRatings();
+            readUsers();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,6 +48,32 @@ abstract public class Server {
 
             ratings.put(tconst, new Rating(tconst, averageRating, numVotes));
         }
+    }
+
+    private static void readUsers() throws IOException {
+
+        for (String[] line : File.readData("users.txt")) {
+
+            String username = line[0];
+            String password = line[1];
+            HashSet<String> ratedVideos = new HashSet<>(Arrays.asList(line[2].split(" ")));
+
+            users.add(new User(username, password, ratedVideos));
+            usernames.add(username);
+        }
+    }
+
+    public static void updateUsers() throws IOException {
+
+        ArrayList<String[]> data = new ArrayList<>();
+        for (User user : users) {
+            data.add(new String[]{user.getUsername(), user.getPassword(),
+                    String.join(" ", user.getRatedVideos())});
+        }
+
+        String header = "username\tpassword\tratedVideos";
+
+        File.writData("users.txt", header, data);
     }
 
     public static void showVideos(boolean sorted, int count) {
