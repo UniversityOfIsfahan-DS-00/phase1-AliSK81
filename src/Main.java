@@ -11,7 +11,7 @@ public class Main {
                 System.out.println("~ Main Menu");
                 System.out.println("1) SignUp");
                 System.out.println("2) SignIn");
-                System.out.println("3) Exit");
+                System.out.println("3) Save & Exit");
 
                 switch (sc.nextInt()) {
                     case 1 -> {
@@ -42,11 +42,12 @@ public class Main {
 
                                 System.out.println("~ Hi " + username);
                                 System.out.println("1) Show all videos");
-                                System.out.println("2) Logout");
+                                System.out.println("2) Show top-10 movies");
+                                System.out.println("3) Logout");
 
                                 switch (sc.nextInt()) {
                                     case 1 -> {
-                                        Server.showVideos();
+                                        Server.showVideos(false, -1);
 
                                         System.out.println("Commands: ");
                                         System.out.println(" > rate <tileId> <yourScore>");
@@ -78,7 +79,8 @@ public class Main {
                                             }
                                         }
                                     }
-                                    case 2 -> login = false;
+                                    case 2 -> Server.showVideos(true, 10);
+                                    case 3 -> login = false;
                                 }
                             }
                         }

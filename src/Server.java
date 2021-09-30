@@ -1,7 +1,5 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 abstract public class Server {
     private static final HashMap<String, Video> videos = new HashMap<>();
@@ -51,14 +49,23 @@ abstract public class Server {
         }
     }
 
-    public static void showVideos() {
+    public static void showVideos(boolean sorted, int count) {
+        List<Video> vids = new ArrayList<>(videos.values());
 
-        for (Video video : videos.values()) {
+        if (sorted)
+            Collections.sort(vids);
+
+        if (count == -1)
+            count = vids.size();
+
+        for (int i = 0; i < count; i++) {
+            Video video = vids.get(i);
             Rating rating = ratings.get(video.getTitleId());
+            System.out.println("------------------------- (" + (i + 1) + ") ---");
             System.out.println(video);
             System.out.println(rating);
-            System.out.println("-----------------------------------");
         }
+        System.out.println("--------------------------- END ---");
     }
 
     // writes new ratings into file
@@ -103,5 +110,9 @@ abstract public class Server {
                 return user;
 
         return null;
+    }
+
+    public static Rating getRating(String tconst) {
+        return ratings.get(tconst);
     }
 }

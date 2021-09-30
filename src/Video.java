@@ -1,4 +1,4 @@
-public class Video {
+public class Video implements Comparable<Video> {
     private final String titleId;
     // a tconst, an alphanumeric unique identifier of the title
     private final int ordering;
@@ -46,5 +46,28 @@ public class Video {
                 "\n\tattributes= " + String.join(", ", attributes) +
                 "\n\tisOriginalTitle= " + isOriginalTitle +
                 "\n}";
+    }
+
+    @Override
+    public int compareTo(Video other) {
+        Rating rating1 = Server.getRating(other.titleId);
+        Rating rating2 = Server.getRating(this.titleId);
+
+        double s1 = rating1.getAverageRating();
+        double s2 = rating2.getAverageRating();
+
+        if (s1 != s2) {
+            // compare by score
+            return (s1 > s2) ? 1 : -1;
+        } else {
+            // compare by numVotes
+            int v1 = rating1.getNumVotes();
+            int v2 = rating2.getNumVotes();
+            return v1 - v2;
+        }
+
+//        return Double.compare(
+//                Server.getRating(other.titleId).getAverageRating(),
+//                Server.getRating(this.titleId).getAverageRating());
     }
 }
