@@ -1,0 +1,3 @@
+username	password	ratedVideos
+ali	123	tt0000001 tt0000002 tt0000005
+reza	456	tt0000022 tt0000011 tt0000015
